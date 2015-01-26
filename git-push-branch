@@ -1,22 +1,14 @@
 #!/bin/bash
 
 function push_branch () {
-    HAS_REMOTE=`git show-ref remotes/origin/$1`
-    HAS_LOCAL=`git show-ref heads/$1`
 
-    if [[ $HAS_REMOTE ]]; then
-        echo "The remote repository already has a branch named $1"
-        exit
-    fi
-
-    if [[ $HAS_LOCAL == '' ]]; then
-        echo "There isn't a local branch named $1"
-        exit
-    fi
-
+    `git add -A :/`
+    `git commit -m "$2"`
     `git push origin $1`
-    `git config branch.$1.merge refs/heads/$1`
-    `git config branch.$1.remote origin`
+    `git checkout master`
+    `git branch -d $1`
+    # `git config branch.$1.merge refs/heads/$1`
+    # `git config branch.$1.remote origin`
 }
 
 push_branch $@
