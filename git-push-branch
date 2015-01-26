@@ -3,9 +3,9 @@
 function push_branch () {
 
     `git add -A :/`
-    `git commit -m "$2"`
+    `git commit -m "$1:$2"`
     `git push origin $1`
-    `git checkout master`
+    `git checkout develop`
     `git branch -d $1`
     # `git config branch.$1.merge refs/heads/$1`
     # `git config branch.$1.remote origin`
